@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Olá, {{ nomeAluno }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="sair()" aria-label="Sair">
+        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment [(ngModel)]="categoria" class="ion-padding-horizontal">
+    <ion-segment-button value="">
+      <ion-label>Todos</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Notícia">
+      <ion-label>Notícias</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Evento">
+      <ion-label>Eventos</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div class="grid">
+  @for (p of publicacoes; track p.id) {
+    <ion-card>
+      <img [src]="p.imagem" [alt]="p.titulo" />
+      <ion-card-header>
+        <ion-badge [color]="p.categoria === 'Evento' ? 'secondary' : 'primary'">{{ p.categoria }}</ion-badge>
+        <ion-card-title>{{ p.titulo }}</ion-card-title>
+        <ion-card-subtitle>{{ p.data | date: 'dd/MM/yyyy' }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        {{ p.resumo }}
+        <ion-button fill="clear" [routerLink]="['/noticia', p.id]">Ler mais</ion-button>
+      </ion-card-content>
+    </ion-card>
+  } @empty {
+    <p class="vazio ion-padding ion-text-center">Nenhuma publicação encontrada.</p>
+  }
+  </div>
+</ion-content>

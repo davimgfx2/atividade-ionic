@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home" text="Voltar"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ publicacao?.categoria ?? 'Publicação' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  @if (publicacao; as p) {
+    <img [src]="p.imagem" [alt]="p.titulo" class="capa" />
+    <div class="ion-padding">
+      <ion-badge [color]="p.categoria === 'Evento' ? 'secondary' : 'primary'">{{ p.categoria }}</ion-badge>
+      <h2>{{ p.titulo }}</h2>
+      <p><small>{{ p.data | date: 'dd/MM/yyyy' }}</small></p>
+      <p>{{ p.conteudo }}</p>
+    </div>
+  } @else {
+    <p class="ion-padding ion-text-center">Publicação não encontrada.</p>
+  }
+</ion-content>

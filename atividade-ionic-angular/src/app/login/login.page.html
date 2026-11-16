@@ -1,0 +1,42 @@
+<ion-content class="ion-padding login-content">
+  <div class="container">
+  <img src="../../assets/img/ucsal.png" alt="" class="image">
+  <div class="login-box">
+    <h1>UCSal</h1>
+    <p>Portal do Aluno</p>
+
+    <form (ngSubmit)="entrar()">
+      <ion-input
+        label="Matrícula"
+        labelPlacement="floating"
+        fill="outline"
+        inputmode="numeric"
+        name="matricula"
+        [(ngModel)]="matricula"
+      ></ion-input>
+      <ion-input
+        class="ion-margin-top"
+        label="Senha"
+        labelPlacement="floating"
+        fill="outline"
+        type="password"
+        name="senha"
+        [(ngModel)]="senha"
+      ></ion-input>
+
+      @if (erro) {
+        <ion-text color="danger"><p class="erro">{{ erro }}</p></ion-text>
+      }
+
+      <ion-button class="ion-margin-top" expand="block" color="secondary" type="submit">Entrar</ion-button>
+    </form>
+
+    <div class="demo">
+      <strong>Conta de demonstração</strong>
+      <span>Matrícula: {{ demo.matricula }}</span>
+      <span>Senha: {{ demo.senha }}</span>
+
+    </div>
+  </div>
+    </div>
+</ion-content>

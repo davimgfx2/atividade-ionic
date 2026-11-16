@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Atualização Cadastral</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  @if (aluno) {
+    <form #f="ngForm" (ngSubmit)="salvar()">
+      <ion-list-header><ion-label>Dados institucionais</ion-label></ion-list-header>
+      <ion-input label="Nome completo" labelPlacement="stacked" fill="outline" [value]="aluno.nome" [disabled]="true"></ion-input>
+      <ion-input class="ion-margin-top" label="Matrícula" labelPlacement="stacked" fill="outline" [value]="aluno.matricula" [disabled]="true"></ion-input>
+      <ion-input class="ion-margin-top" label="Curso" labelPlacement="stacked" fill="outline" [value]="aluno.curso" [disabled]="true"></ion-input>
+
+      <ion-list-header class="ion-margin-top"><ion-label>Contato</ion-label></ion-list-header>
+      <ion-input
+        label="E-mail pessoal"
+        labelPlacement="stacked"
+        fill="outline"
+        type="email"
+        name="email"
+        required
+        email
+        [(ngModel)]="aluno.email"
+      ></ion-input>
+      <ion-input
+        class="ion-margin-top"
+        label="Telefone / WhatsApp"
+        labelPlacement="stacked"
+        fill="outline"
+        type="tel"
+        name="telefone"
+        required
+        [(ngModel)]="aluno.telefone"
+      ></ion-input>
+
+      <ion-list-header class="ion-margin-top"><ion-label>Endereço</ion-label></ion-list-header>
+      <ion-input label="CEP" labelPlacement="stacked" fill="outline" name="cep" required [(ngModel)]="aluno.endereco.cep"></ion-input>
+      <ion-input class="ion-margin-top" label="Rua" labelPlacement="stacked" fill="outline" name="rua" required [(ngModel)]="aluno.endereco.rua"></ion-input>
+      <ion-input class="ion-margin-top" label="Bairro" labelPlacement="stacked" fill="outline" name="bairro" required [(ngModel)]="aluno.endereco.bairro"></ion-input>
+      <ion-input class="ion-margin-top" label="Cidade" labelPlacement="stacked" fill="outline" name="cidade" required [(ngModel)]="aluno.endereco.cidade"></ion-input>
+
+      @if (f.invalid && f.submitted) {
+        <ion-text color="danger"><p>Preencha todos os campos com valores válidos.</p></ion-text>
+      }
+
+      <ion-button class="ion-margin-top" expand="block" color="secondary" type="submit" [disabled]="f.invalid">
+        Salvar Alterações
+      </ion-button>
+    </form>
+  }
+</ion-content>

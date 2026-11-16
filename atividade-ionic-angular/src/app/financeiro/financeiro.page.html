@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Financeiro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-select label="Semestre letivo" labelPlacement="floating" [(ngModel)]="semestre">
+      @for (s of semestres; track s) {
+        <ion-select-option [value]="s">{{ s }}</ion-select-option>
+      }
+    </ion-select>
+  </ion-item>
+
+  @for (m of mensalidades; track m.id) {
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{ m.mes }}</ion-card-title>
+        <ion-card-subtitle>Vencimento: {{ m.vencimento | date: 'dd/MM/yyyy' }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="linha">
+          <strong>{{ m.valor | currency: 'BRL' }}</strong>
+          <ion-badge [color]="m.status === 'Paga' ? 'success' : 'warning'">{{ m.status }}</ion-badge>
+        </div>
+        @if (m.status === 'A Pagar') {
+          <p class="codigo">{{ m.codigoBarras }}</p>
+          <ion-button expand="block" fill="outline" (click)="copiarCodigo(m)">
+            <ion-icon slot="start" name="copy-outline"></ion-icon>
+            Copiar Código de Barras
+          </ion-button>
+        }
+      </ion-card-content>
+    </ion-card>
+  } @empty {
+    <p class="ion-padding ion-text-center">Nenhuma mensalidade neste semestre.</p>
+  }
+</ion-content>
